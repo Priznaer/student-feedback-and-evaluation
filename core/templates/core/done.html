@@ -1,0 +1,57 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+
+
+{% block title %}Successful Feedback{% endblock %}
+
+
+{% block styles %}
+        main {
+            padding: 15px 30px;
+            width: 500px;
+            height: 200px;
+            margin: auto;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #content {
+            position: relative;
+            top: 20%;
+        }
+
+        #content a, #content p {
+            display: block;
+            text-align: center;
+        }
+
+        #content a {
+            text-decoration: none;
+        }
+
+        #content a:hover {
+            text-decoration: underline;
+        }
+
+        #success-message {
+            color: blue;
+            font-size: large;
+            margin-bottom: 0;
+        }
+
+        #content span {
+            display: block;
+        }
+{% endblock %}
+
+
+{% block content %}
+    <div id="content">
+        <p id="success-message">Feedback Recorded Successfully.</p>
+        <span class="text-center">-</span>
+        <span class="text-center">Have a nice day.</span>
+        <a href="{% url 'create_feedback' %}">Evaluate Different Course</a>
+    </div>
+{% endblock %}

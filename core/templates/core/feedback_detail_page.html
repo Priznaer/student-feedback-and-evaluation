@@ -1,0 +1,101 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+
+
+{% block head %}<link rel="stylesheet" href="{% static 'css/feedback_form_page.css' %}">{% endblock %}
+
+
+
+{% block title %}Feedback Detail{% endblock %}
+
+
+{% block styles %}
+        input[type="radio"]:disabled {
+            cursor: not-allowed;
+        }
+
+        input:checked {
+          border: none;
+          outline: 2px solid blue;
+        }
+{% endblock %}
+
+
+{% block header %}
+    <header>
+        <h1>Feedback Detail</h1>
+        <p class="text-center">A view of a submitted feedback</p>
+    </header>
+{% endblock %}
+
+
+{% block content %}
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="base3">
+               <div><label>Date:</label> {{ data.date }}</div>
+               {% if isAdmin %}<div><label>Time:</label> {{ data.time }}</div>{% endif %}
+               <div><label>UUID:</label> {{ data.uid }}</div>
+
+            </div>
+            <div class="base3">
+                <div><label>Course:</label> {{ data.course }}</div>
+                <div><label>Lecturer:</label> {{ data.lecturer }}</div>
+                <div><label>Classroom:</label> {{ data.classroom }}</div>
+            </div>
+            <div class="question">
+                <p>1. How punctual was the lectuerer to class?</p>
+                {{ form.question1 }}
+            </div>
+            <div class="question">
+                <p>2. How was the Lecturer's presentation?</p>
+                {{ form.question2 }}
+            </div>
+            <div class="question">
+                <p>3. How was the students' participation level during the lecture?</p>
+                {{ form.question3 }}
+            </div>
+            <div class="question">
+                <p>4. How was the lecturer's explanation of concepts?</p>
+                {{ form.question4 }}
+            </div>
+            <div class="question">
+                <p>5. How respectful was the lecturer of students?</p>
+                {{ form.question5 }}
+            </div>
+            <div class="question">
+                <p>6. How was the pace of the lecture?</p>
+                {{ form.question6 }}
+            </div>
+            <div class="question">
+                <p>7. Did the lecturer state the objectives and expectations for the lecture?</p>
+                {{ form.question7 }}
+            </div>
+            <div class="question">
+                <p>8. How clear were the instructions and expectations for the lecture?</p>
+                {{ form.question8 }}
+            </div>
+            <div class="question">
+                <p>9. Did the lecturer allow questions from students?</p>
+                {{ form.question9 }}
+            </div>
+            <div class="question">
+                <p>10. How conducive was the classrom for teaching and learning?</p>
+                {{ form.question10 }}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+{% endblock %}
+
+
+{% block extras %}
+    <script type="text/javascript" defer>
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.disabled = true;
+        });
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.style.cursor = "not-allowed";
+    </script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+
+
+{% block title %}Feedback Error{% endblock %}
+
+
+{% block styles %}
+        main {
+            padding: 15px 30px;
+            width: 500px;
+            height: 200px;
+            margin: auto;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #content {
+            position: relative;
+            top: 30%;
+        }
+
+        #content a, #content p {
+            display: block;
+            text-align: center;
+        }
+
+        #content a {
+            text-decoration: none;
+        }
+
+        #content a:hover {
+            text-decoration: underline;
+        }
+
+        #error-message {
+            color: red;
+            font-size: large;
+        }
+{% endblock %}
+
+
+{% block content %}
+    <div id="content">
+        <p id="error-message">{{error_message}}</p>
+        <a href="{% url 'create_feedback' %}">Evaluate Different Course</a>
+    </div>
+{% endblock %}

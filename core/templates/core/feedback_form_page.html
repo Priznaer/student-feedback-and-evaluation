@@ -1,0 +1,184 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+{% block head %} <link rel="stylesheet" href="{% static 'css/feedback_form_page.css' %}"> {% endblock %}
+{% block styles %}
+        .error-border {
+            border: 2px solid red;
+        }
+
+        .error-message {
+            color: red;
+        }
+{% endblock %}
+{% block title %}Feedback Form{% endblock %}
+{% block header %}
+<header>
+    <h1>Lecture Feedback</h1>
+    <p>You are welcome to the GCTU Student Evaluation and Feedback System. Please note that all information here is highly confidential and do not tend to have you in trouble by the lecturer or administration but as a way of ensuring progressive teaching and learning interaction in the GCTU community.</p>
+</header>
+{% endblock%}
+{% block content %}
+    <form action="." method="post" id="feedback-form" novalidate>
+        {% csrf_token %}
+        <div class="base3">
+            {{ form.course }}
+            {{ form.lecturer }}
+            {{ form.classroom }}
+        </div>
+        <div id="error-div">
+            {% if form.error %}
+                {{ form.error }}
+            {% endif %}
+        </div>
+        <div class="question" id="question1">
+            <p>1. How punctual was the lecturer to class?</p>
+            {{ form.question1 }}
+        </div>
+        <div class="question" id="question2">
+            <p>2. How was the Lecturer's presentation?</p>
+            {{ form.question2 }}
+        </div>
+        <div class="question" id="question3">
+            <p>3. How was the students' participation level during the lecture?</p>
+            {{ form.question3 }}
+        </div>
+        <div class="question" id="question4">
+            <p>4. How was the lecturer's explanation of concepts?</p>
+            {{ form.question4 }}
+        </div>
+        <div class="question" id="question5">
+            <p>5. How respectful was the lecturer of students?</p>
+            {{ form.question5 }}
+        </div>
+        <div class="question" id="question6">
+            <p>6. How was the pace of the lecture?</p>
+            {{ form.question6 }}
+        </div>
+        <div class="question" id="question7">
+            <p>7. Did the lecturer state the objectives and expectations for the lecture?</p>
+            {{ form.question7 }}
+        </div>
+        <div class="question" id="question8">
+            <p>8. How clear were the instructions and expectations for the lecture?</p>
+            {{ form.question8 }}
+        </div>
+        <div class="question" id="question9">
+            <p>9. Did the lecturer allow questions from students?</p>
+            {{ form.question9 }}
+        </div>
+        <div class="question" id="question10">
+            <p>10. How conducive was the classroom for teaching and learning?</p>
+            {{ form.question10 }}
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
+{% block extras %}
+    {{ course_names | json_script:"course_options" }}
+    {{ lecturers_dict | json_script:"lecturers_dict" }}
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+
+            function updateLecturerOptions() {
+                const lecturers_dict = JSON.parse(document.getElementById("lecturers_dict").textContent)
+                const lecturersSelect = document.getElementById("lecturer")
+                const courseSelect = document.getElementById('course');
+
+                const courseValue = courseSelect.value
+                const lecturer_options = lecturers_dict[courseValue]
+                // Clear existing dropdown options
+                lecturersSelect.innerHTML = '';
+
+                // add the default option
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = 'Select Lecturer';
+                lecturersSelect.appendChild(defaultOption);
+
+                // Loop through the options and create <option> elements
+                Object.keys(lecturer_options).forEach(key => {
+                    // Create a new <option> element
+                    const optionElement = document.createElement('option');
+                    
+                    // Set the value and text for each option
+                    optionElement.value = key;
+                    optionElement.textContent = lecturer_options[key];
+                    
+                    // Append the <option> element to the <select> element
+                    lecturersSelect.appendChild(optionElement);
+                });
+            }
+
+
+            const course_options = JSON.parse(document.getElementById("course_options").textContent)
+
+            // Get the <select> element by its id
+            const selectElement = document.getElementById('course');
+
+            // add event listener
+            selectElement.addEventListener('change', updateLecturerOptions)
+
+            // Loop through the options and create <option> elements
+            Object.keys(course_options).forEach(key => {
+                // Create a new <option> element
+                const optionElement = document.createElement('option');
+                
+                // Set the value and text for each option
+                optionElement.value = key;
+                optionElement.textContent = course_options[key];
+                
+                // Append the <option> element to the <select> element
+                selectElement.appendChild(optionElement);
+            });
+
+            document.getElementById('feedback-form').addEventListener('submit', function(event) {
+                // Prevent form submission
+                console.log(event)
+                event.preventDefault();
+                
+                // Clear previous errors
+                const errorDiv = document.getElementById('error-div');
+                errorDiv.textContent = '';
+                const selectFields = document.querySelectorAll('select');
+                const radioFields = document.querySelectorAll('input[type="radio"]');
+                let formIsValid = true;
+
+                // Validate select fields
+                selectFields.forEach(select => {
+                    if (select.value === '') {
+                        select.classList.add('error-border');
+                        console.log(select.classList)
+                        formIsValid = false;
+                    } else {
+                        select.classList.remove('error-border');
+                    }
+                });
+
+                // Validate radio button groups
+                // Check for each question number (1-10, adjust as needed)
+                for (let i = 1; i <= 10; i++) {
+                    const radios = document.querySelectorAll(`input[name="question${i}"]`);
+                    const isChecked = Array.from(radios).some(radio => radio.checked);
+                    const questionDiv = document.getElementById(`question${i}`);
+                    const questionParagraph = questionDiv.querySelector('p');
+                    if (!isChecked) {
+                        questionParagraph.style.color = 'red'; 
+                        formIsValid = false;
+                    } else {
+                        questionParagraph.style.color = ''; 
+                    }
+                }
+
+                // If the form is not valid, show the error message
+                if (!formIsValid) {
+                    errorDiv.textContent = 'All fields are required';
+                    errorDiv.style.color = 'red';
+                } else {
+                    // Remove error message and submit the form if valid
+                    errorDiv.textContent = '';
+                    this.submit();
+                }
+            });
+        });
+    </script>
+{% endblock %}

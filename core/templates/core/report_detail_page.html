@@ -1,0 +1,64 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+
+{% block title %}Report Detail{% endblock %}
+
+{% block head %} 
+    <link rel="stylesheet" href="{% static 'css/feedback_form_page.css' %}"> 
+{% endblock %}
+
+{% block styles %}
+    .report-detail {
+        display: block;
+        margin: 3px auto;
+    }
+
+    .table-container {
+        width: 80%;
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <iframe src="{{ viz_src }}" width="90%" height="600"></iframe>
+    </div>
+    <div class="table-container mx-auto">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <td>Created By: {{ report.creator }}</td>
+                    <td>Created On: {{ report.creation_datetime.date }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="text-center bg-dark text-light">Report Criteria</td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>{{ criteria.start_date }}</td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td>{{ criteria.end_date }}</td>
+                </tr>
+                <tr>
+                    <td>Lecturer</td>
+                    <td>{{ criteria.lecturer }}</td>
+                </tr>
+                <tr>
+                    <td>Programme</td>
+                    <td>{{ criteria.programme }}</td>
+                </tr>
+                <tr>
+                    <td>Course</td>
+                    <td>{{ criteria.course }}</td>
+                </tr>
+                <tr>
+                    <td>Classroom</td>
+                    <td>{{ criteria.classroom }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

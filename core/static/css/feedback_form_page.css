@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
+/*html {
+    font-size: medium;
+}
+*/
+body {
+    margin: 0;
+    padding-bottom: 20px;
+    background-color: rgb(236, 242, 248);
+}
+
+.nav-container {
+    width: 100%;
+    height: 100px;
+}
+
+.upper-nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(88, 119, 220);
+    padding: 20px;
+}
+
+.upper-nav .title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.shared-cmds a {
+    border: 2px solid rgb(88, 119, 220);
+    border-radius: 7px;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.shared-cmds a:hover {
+    background-color: rgb(88, 119, 220);
+    color: white;
+}
+
+header {
+    width: 80%;
+    margin: auto;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 25px;
+}
+
+main {
+    padding: 15px 30px;
+    width: 80%;
+    min-height: 100px;
+    margin: auto;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+form .base3 {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+select {
+    max-width: 33%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select:hover {
+    border: 1.5px solid rgb(88, 119, 220);
+    background-color: rgba(255, 255, 255, 0.7);
+    color: rgb(13, 60, 215);
+}
+
+.question p {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.question label {
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+form button[type="submit"] {
+    display: block;
+    margin: 30px auto 0;
+    border-radius: 7px;
+    padding: 10px;
+    color: white;
+    min-width: 80px;
+    background-color: rgb(88, 119, 220);
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+form button[type="submit"]:hover {
+    transform: scale(1.05);
+}
+
+.done {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}

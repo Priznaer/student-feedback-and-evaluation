@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../images/GCTU-Campus.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0,7);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.account-type, 
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    padding: 10px;
+    border-radius: 4px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    border: 1px solid #ccc;
+}
+
+
+button, label {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #560eff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover, label:hover {
+    background-color: rgb(220, 220, 0);
+    color: black;
+    font-weight: bold;
+}
+
+input[type="radio"]:checked + label {
+    background-color: rgb(220, 220, 0);
+    color: black;
+    font-weight: bold;
+}
+
+.error-list, .error-list li {
+    margin: 0;
+    color: red;
+}
+
+.error-list li {
+    list-style: none;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,157 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/feedback_form_page.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/dashboard_styles.css' %}">
+{% endblock %}
+
+{% block styles %}
+        header p {
+            font-weight: bold;
+            font-size: large;
+            color : blue;
+        }
+
+        .dashboard-child {
+            border: 2px solid blue;
+            border-radius: 5px;
+            padding: 10px;
+            max-height: fit-content;
+            width: 23%;
+            margin: 10px;
+        }
+
+        details {
+            margin: 10px auto auto;
+            text-align: center;
+        }
+
+        details a {
+            text-decoration: none;
+        }
+
+        details a:hover {
+            text-decoration: underline;
+        }
+
+        #genRprt-link {
+            width: 160px;
+            height: 45px;
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: skyblue;
+            color: black;
+            font-size: large;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        #genRprt-link:hover {
+            border: 2px solid black;
+            color: blue;
+        }
+
+        .empty-list {
+            margin: 5px 0 0;
+            color: blue;
+        }
+{% endblock %}
+
+{% block title %}{{ request.user.groups.all.first.name}} Home{% endblock %}
+
+{% block header %}
+    <h1 class="text-center">{{ request.user.groups.all.first.name}} Admin</h1>
+    <p class="text-center">Hello {{ user.username }},</p>
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard">
+        <div class="dashboard-card">
+            <p class="heading text-center">Total Feedbacks</p>
+            <p class="count text-center">{{ all_feedbacks | length }}</p>
+        </div>
+        <div class="dashboard-card">
+            <p class="heading text-center">Today's Feedbacks</p>
+            <p class="count text-center">{{ feedbacks_today | length }}</p>
+        </div>
+        <div class="dashboard-card">
+            <p class="heading text-center">Total Reports</p>
+            <p class="count text-center">{{ all_reports | length}}</p>
+        </div>
+        <div class="dashboard-card">
+            <p class="heading text-center">Today's Reports</p>
+            <p class="count text-center">{{ reports_today | length}}</p>
+        </div>
+    </div>
+    <div class="dashboard item">
+        <div class="dashboard-child" id="all-feedbacks" >
+            <details>
+                <summary>
+                    <span>All Feedbacks</span>
+                </summary>
+                    {% if all_feedbacks %}
+                    <ul>
+                        {% for feedback in all_feedbacks %}
+                            <li class="feedback-entry">{{ feedback.datetime.date }} <a href="{% url 'feedback_detail' feedback_pk=feedback.uid %}" class="feedback-link">View Feedback</a> </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty-list">No Feedbacks Available</p>
+                {% endif %}
+            </details>
+        </div>
+        <div class="dashboard-child" id="feedbacks-today" >
+            <details>
+                <summary>
+                    <span>Feedbacks Today</span>
+                </summary>
+                    {% if feedbacks_today %}
+                    <ul>
+                        {% for feedback in feedbacks_today %}
+                            <li class="feedback-entry">{{ feedback.datetime.date }} <a href="{% url 'feedback_detail' feedback_pk=feedback.uid %}" class="feedback-link">View Feedback</a> </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty-list">No Feedbacks Created Today</p>
+                {% endif %}
+            </details>
+        </div>
+        <div class="dashboard-child" id="all-reports">
+            <details>
+                <summary>
+                    <span>All Reports</span>
+                </summary>
+                    {% if all_reports %}
+                    <ul>
+                        {% for report in all_reports %}
+                            <li class="report-entry">{{ report.creation_datetime.date }} <a href="{% url 'view_report' report_pk=report.uid %}" class="report-link">View Report</a> </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty-list">No Reports Available</p>
+                {% endif %}
+            </details>
+        </div>
+        <div class="dashboard-child" id="reports-today">
+            <details>
+                <summary>
+                    <span>Reports Today</span>
+                </summary>
+                {% if reports_today %}
+                    <ul>
+                        {% for report in reports_today %}
+                            <li class="report-entry">{{ report.creation_datetime.date }} <a href="{% url 'view_report' report_pk=report.uid %}" class="report-link">View Report</a> </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty-list">No Reports Created Today</p>
+                {% endif %}
+            </details>
+        </div>
+    </div>
+    <a href="/generate-report" id="genRprt-link">Generate Report</a>
+{% endblock %}

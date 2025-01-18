@@ -1,0 +1,22 @@
+.dashboard {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dashboard-card {
+    background-color: skyblue;
+    border: 2px solid white;
+    border-radius: 20px 5px;
+    margin: 10px;
+    width: 30%;
+    padding: 20px;
+}
+
+.dashboard-card .heading {
+    font-size: x-large;
+}
+
+.dashboard-card .count {
+    font-size: x-large;
+    font-weight: bold;
+}

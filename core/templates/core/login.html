@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login_page_styles.css' %}">
+    <title>Student Feedback & Evaluation</title>
+    <style type="text/css">
+        @media (max-width: 1020px) {
+            body * {
+                display: none;
+                background-color: cadetblue;
+            }
+
+            body #cover-all {
+                height: 100%;
+                width: 100vw;
+                z-index: 9999;
+                padding: 30%;
+                color: white;
+                display: block;
+            }
+
+            body #cover-all p {
+                display: block;
+                font-size: 50px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover-all -->
+    <div id="cover-all">
+        <p>Please Visit The Site On A Wider Screen!</p>
+    </div>
+    <div class="container">
+        <h1>Student <br>Feedback & Evaluation</h1>
+        {% if form.non_field_errors %}
+            <ul class="error-list">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post" action="." class="login-form">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+            <ul class="error-list">
+                {% for error in form.username.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <label for="password">Password:</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+            <ul class="error-list">
+                {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <label>{{ form.remember }}Remember Me</label>
+            <button type="submit">Login</button>
+            <p>Forgot your password? <a href="#" class="reset-password">Click here</a></p>
+            {{ form.account_type }}
+        </form>
+        </div>
+    </div>
+</body>
+</html>

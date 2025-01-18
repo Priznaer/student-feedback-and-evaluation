@@ -1,0 +1,33 @@
+{% extends 'core/base1.html' %}
+{% load static %}
+
+{% block title %}Access Denied {% endblock %}
+
+{% block styles %}
+        .basee-container {
+            position: relative;
+        }
+
+        main {
+            position: absolute;
+            top: 35%;
+            left: 15%;
+            padding: 15px 30px;
+            max-width: 70%;
+            margin: auto;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        main img {
+            display: block;
+            margin: auto;
+        }
+{% endblock %}
+
+{% block content %}
+        <img src="{% static 'images/access_denied_image.jpg' %}">
+        <h1>Sorry, You Do Not have Permission To View This Page!</h1>
+{% endblock %}

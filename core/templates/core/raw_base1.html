@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/bootstrap/css/bootstrap.css">
+    <title>Base template 1</title>
+    <style>
+        body {
+            background-color: rgb(240, 240, 240);
+        }
+        
+        nav ul .nav-item {
+            border: 2px solid white;
+            border-radius: 5px;
+            margin: auto 5px;
+        }
+
+        nav ul .nav-item:hover {
+            transition-duration: 1.25s;
+            border-color: blue;
+            background-color: white;
+            color: blue;
+        }
+
+        nav ul .nav-link {
+            color: white;
+        }
+
+        nav div span.nav-heading {
+            color:white; 
+            margin: auto; 
+            font-size: 40px; 
+        }
+
+        main p.default {
+            margin: auto; 
+            text-align: center; 
+            font-size: xx-large; 
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="../../static/images/GCTU_logo_plus_text.png" alt="..." height="60">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <span class="nav-heading">Student Feedback & Evaluation</span>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Page Content -->
+  <main>
+    <p class="default">Page Content Here</p>
+  </main>
+</body>
+</html>
